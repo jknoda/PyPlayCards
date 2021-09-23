@@ -30,7 +30,7 @@ def predict():
 
     # prediction
     pred = model.predict(df_raw)
-    df_raw['prediction'] = pred
+    df_raw['resultado'] = pred
 
     return df_raw.to_json(orient='records')
 
