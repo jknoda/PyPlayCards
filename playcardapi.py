@@ -13,16 +13,13 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 model = pickle.load( open('playcardsapi.pkl', 'rb'))
 # instanciate flask
 app = Flask( __name__ )
-
-cors = CORS(app, resources={"/predict": {"origins": "*"}})
-app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={"/*": {"origins": "*"}})
 
 @app.route('/')
 def index():
     return "<h1>Excutando Python</h1>"
 
 @app.route('/predict', methods=['POST'])
-@cross_origin(origin='*',headers=['Content-Type'])
 def predict():
     test_json = request.get_json()
     # collect data
