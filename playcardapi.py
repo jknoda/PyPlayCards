@@ -22,6 +22,7 @@ def index():
     return "<h1>Excutando Python</h1>"
 
 @app.route('/predict', methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def predict():
     test_json = request.get_json()
     # collect data
