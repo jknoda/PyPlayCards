@@ -32,7 +32,7 @@ def predict():
     # prediction
     pred = model.predict(df_raw)
     df_raw['resultado'] = pred
-
+    # df_raw.headers.add("Access-Control-Allow-Origin", "*")
     return df_raw.to_json(orient='records')
 
 if __name__ == '__main__':

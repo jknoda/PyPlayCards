@@ -2,3 +2,5 @@ pandas==1.2.4
 Flask==1.1.2
 numpy==1.21.2
 scikit_learn==0.24.2
+Flask-Cors==3.0.10
+Flask-Ext==0.1
