@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import pickle
 from flask import Flask, request
-from flask_cors import CORS
+from flask.ext.cors import CORS, cross_origin
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
@@ -13,12 +13,13 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 model = pickle.load( open('playcardsapi.pkl', 'rb'))
 # instanciate flask
 app = Flask( __name__ )
-CORS(app)
 
+cors = CORS(app, resources={"/predict": {"origins": "*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/')
 def index():
-    return "<h1>Excutando Pyton</h1>"
+    return "<h1>Excutando Python</h1>"
 
 @app.route('/predict', methods=['POST'])
 def predict():
