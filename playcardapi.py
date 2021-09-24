@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import pickle
 from flask import Flask, request
-from flask.ext.cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
