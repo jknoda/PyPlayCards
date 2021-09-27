@@ -17,7 +17,7 @@ cors = CORS(app, resources={"/*": {"origins": "*"}})
 
 @app.route('/')
 def index():
-    return "<h1>Excutando Python</h1>"
+    return "<h1>Machine Learning - Árvore de decisão - v1.0a2</h1>"
 
 @app.route('/predict', methods=['POST'])
 def predict():
