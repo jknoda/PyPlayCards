@@ -10,7 +10,8 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 
 # load model
-model = pickle.load( open('playcardsapi.pkl', 'rb'))
+modelpredict = pickle.load( open('playcardspredictapi.pkl', 'rb'))
+modelversus = pickle.load( open('playcardsversusapi.pkl', 'rb'))
 # instanciate flask
 app = Flask( __name__ )
 cors = CORS(app, resources={"/*": {"origins": "*"}})
@@ -30,7 +31,23 @@ def predict():
             df_raw = pd.DataFrame(test_json,columns=test_json[0].keys())
 
     # prediction
-    pred = model.predict(df_raw)
+    pred = modelpredict.predict(df_raw)
+    df_raw['resultado'] = pred
+    # df_raw.headers.add("Access-Control-Allow-Origin", "*")
+    return df_raw.to_json(orient='records')
+
+@app.route('/versus', methods=['POST'])
+def versus():
+    test_json = request.get_json()
+    # collect data
+    if test_json:
+        if isinstance(test_json, dict): # unique value
+            df_raw = pd.DataFrame(test_json, index=[0])
+        else:
+            df_raw = pd.DataFrame(test_json,columns=test_json[0].keys())
+
+    # prediction
+    pred = modelversus.predict(df_raw)
     df_raw['resultado'] = pred
     # df_raw.headers.add("Access-Control-Allow-Origin", "*")
     return df_raw.to_json(orient='records')
